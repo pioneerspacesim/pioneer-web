@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+
+  <head>
+  <title>%extratitle::extratitle%Pioneer</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Orbitron">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Titillium+Web">
+
+  <link rel='stylesheet' type='text/css' href='/style.css'>
+
+  <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+
+  <link rel="publisher" href="https://plus.google.com/101415443691492553003">
+
+  <script type="text/javascript">
+  //<!CDATA[
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18984507-2']);
+        _gaq.push(['_trackPageview']);
+
+      (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+     //]]>
+  </script>
+</head>
+
+<body>
+
+<div id='wrap'>
+
+<div id='nav'>
+  <a href='/'>Home</a>
+  <a href='/download'>Download</a>
+  <a href='/contribute'>Contribute</a>
+  <a href='/wiki'>Wiki</a>
+  <a href='/irc'>IRC</a>
+  <a href='/issues'>Issue tracker</a>
+</div>
+
+<div id='header'>
+  <h1><a href="/">Pioneer</a></h1>
+  <h2><a href="/">A game of lonely space adventure</a></h2>
+</div>
+
+
+<div id='sidebar'>
+
+<div id='download'>
+<a id='download-button' href='/download'>
+  <div id='download-content'>
+    <h3>Pioneer alpha 31</h3>
+    <h4>Free download<span id='download-platform'></span></h4>
+    <p>Released 8 Feb 2013<span id='download-size'></span></p>
+  </div>
+</a>
+<div id='download-links'>
+  <a href="/download#changelog">Changelog</a> &middot; <a href="/download">Other systems</a>
+</div>
+</div>
+
+<script type="text/javascript">
+//<!CDATA[
+  (function () {
+    var releases = {
+      "Win":   [ "Windows",  "http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha31-win32.7z/download",        "192.2MB" ],
+      "Mac":   [ "Mac OS X", "http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha31.dmg/download",             "202.5MB" ],
+      "Lin":   [ "Linux 32", "http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha31-linux32.tar.bz2/download", "196.0MB" ],
+      "Lin64": [ "Linux 64", "http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha31-linux64.tar.bz2/download", "196.3MB" ],
+    };
+
+    var platform = navigator.platform.substr(0,3);
+    if (navigator.userAgent.match(/x86_64/))
+      platform += "64";
+
+    var release = releases[platform];
+      if (!release)
+        return;
+
+    document.getElementById("download-platform").innerHTML = " for " + release[0];
+    document.getElementById("download-button").href        = release[1];
+    document.getElementById("download-size").innerHTML     = " &middot; " + release[2];
+  })();
+//]]>
+</script>
+
+<div id='news'>
+<h3>What's happening <a href='https://plus.google.com/101415443691492553003'><img id='plus-icon' src='https://ssl.gstatic.com/images/icons/gplus-32.png' width='32' height='32' alt='Pioneer on G+'></a></h3>
+%module::plus%
+</div>
+
+</div>
+
+
+<div id='main-wrap'>
+
+<div id='main'>

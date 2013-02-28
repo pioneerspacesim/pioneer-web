@@ -1,0 +1,228 @@
+  html, body, div, span, object,
+  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+  a, abbr, acronym, address, big, cite, code,
+  del, dfn, em, font, img, ins, kbd, q, s, samp,
+  small, strike, strong, sub, sup, tt, var,
+  dl, dt, dd, ol, ul, li,
+  fieldset, form, label, legend,
+  table, caption, tbody, tfoot, thead, tr, th, td {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        font-weight: inherit;
+        font-style: inherit;
+        font-size: 100%;
+        font-family: inherit;
+        vertical-align: baseline;
+  }
+  body {
+       line-height: 1;
+       color: white;
+       background: black;
+       }
+  ol, ul {
+        list-style: none;
+  }
+  table {
+        border-collapse: collapse;
+        border-spacing: 0;
+  }
+  caption, th, td {
+        text-align: left;
+        font-weight: normal;
+  }
+  blockquote:before, blockquote:after,
+  q:before, q:after {
+        content: "";
+  }
+  blockquote, q {
+        quotes: "" "";
+  }
+
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background: #212118 url(banner.png) center top no-repeat;
+    max-width: 1440px;
+    margin: 0 auto;
+    font-family: sans-serif;
+}
+
+div#wrap {
+    min-height: 100%;
+    position: relative;
+}
+
+h1,h2,h3,h4 {
+    font-family: "Orbitron", sans-serif;
+    text-shadow: 2px 2px 2px #000;
+    color: #fff;
+}
+h1 {
+    font-size: 400%;
+}
+h2 {
+    font-size: 250%;
+}
+h3 {
+    font-size: 200%;
+}
+h4 {
+    font-size: 120%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+div#nav {
+    margin: 0;
+    padding: 10px;
+    background-color: rgba(0,0,0,0.5);
+    color: #fff;
+    font-family: "Titillium Web", sans-serif;
+    font-weight: bold;
+}
+
+div#nav a {
+    padding: 0 10px;
+}
+
+div#nav a:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+
+div#header {
+    width: 90%;
+    padding: 10px;
+    margin: 0 auto;
+    font-weight: bold;
+}
+
+div#header * {
+    margin: 5px 0;
+    padding: 0;
+}
+
+div#main-wrap {
+    width: 70%;
+    padding: 0 0 60px 0;
+}
+
+div#main {
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: rgba(255,255,255,0.5);
+    box-shadow: 0px 0px 20px rgba(128,128,128,0.5);
+    color: #000;
+}
+
+div#main a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+div#main > * {
+    margin: 10px 0;
+}
+
+div#main ul > li > ul {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+div#footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 10px 0;
+    background-color: rgba(0,0,0,0.5);
+    font-family: "Titillium Web", sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+
+div#footer a:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+
+div#sidebar {
+    float: right;
+    width: 30%;
+    margin-right: 20px;
+}
+
+div#download {
+    float: right;
+}
+
+a#download-button {
+    cursor: pointer;
+    display: inline-block;
+    background-color: #8a2300;
+    margin-left: 64px;
+    padding-left: 64px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px #000;
+}
+
+div#download-content {
+    display: block;
+    height: 108px;
+    margin-left: -128px;
+    padding: 10px 10px 10px 138px;
+    background: url(badge.png) 0 0 no-repeat;
+    font-family: "Titillium Web", sans-serif;
+}
+
+div#download-content > * {
+    padding-bottom: 5px;
+}
+
+div#download-content > * {
+    text-shadow: 0 -2px 0 rgba(0,0,0,0.25);
+}
+
+div#download-content > h3, div#download-content > h4 {
+    font-family: "Titillium Web", sans-serif;
+    text-shadow: 2px 2px 2px #000;
+}
+
+div#download-links {
+    margin: 10px;
+    text-align: right;
+}
+
+div#news {
+    clear: both;
+    padding: 10px 0;
+}
+
+div.plus-post {
+    padding: 5px 0;
+}
+span.plus-post-meta {
+    font-size: smaller;
+    color: rgba(255,255,255,0.8);
+}
+span.plus-post-meta > a {
+    text-decoration: underline;
+}
+
+img#plus-icon {
+    vertical-align: middle;
+}
+
+ul {
+    list-style: disc inside;
+    margin-left: 1em;
+}

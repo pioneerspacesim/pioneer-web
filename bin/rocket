@@ -1,0 +1,296 @@
+#!/usr/bin/env perl
+
+# rocket - static website generator
+# Copyright © 2006-2013 Robert Norris
+# Artistic license v2
+
+package rocket;
+
+use warnings;
+use strict;
+
+# source and target dirs
+our $SOURCE_DIR = "$FindBin::Bin/../src";
+our $OUTPUT_DIR = "$FindBin::Bin/../out";
+
+# the default template stash. any values here will be copied into the post
+# stash and available for inclusion in templates as %rocket::<key>%
+my %default_stash = (
+    "site_name"        => "Pioneer",
+    "site_description" => "A game of lonely space adventure",
+    "site_url"         => "http://pioneerspacesim.net/",
+);
+
+use FindBin;
+use File::Path qw(make_path);
+use File::Copy qw(copy);
+
+use lib "$FindBin::Bin/../lib";
+
+use Module::Pluggable instantiate => "new",
+                      search_path => "rocket::plugin";
+
+BEGIN {
+    eval "use Readonly";
+}
+
+$ENV{TZ} = ":Australia/Melbourne";
+
+my @plugins = __PACKAGE__->plugins;
+
+my %priority;
+for my $plugin (@plugins) {
+    my $pri = {};
+    if ($plugin->can("priority")) {
+        $pri = $plugin->priority;
+    }
+
+    my @methods = qw(flavour postlist indexlist content extrafiles);
+
+    for my $method (@methods) {
+        $pri->{$method} = 50 if !exists $pri->{$method};
+
+        push @{$priority{$method}->{$pri->{$method}}}, $plugin if $plugin->can($method);
+    }
+}
+
+my %plugins;
+for my $method (keys %priority) {
+    $plugins{$method} = [map { @{$priority{$method}->{$_}} } sort { $a <=> $b } keys %{$priority{$method}}];
+}
+
+sub plugin_call {
+    my $method = shift;
+
+    for my $plugin (@{$plugins{$method}}) {
+        my $ret = $plugin->$method(@_);
+        last if !$ret;
+    }
+
+    return;
+}
+
+$SOURCE_DIR =~ s/\/+$//;
+$OUTPUT_DIR =~ s/\/+$//;
+
+if (defined $Readonly::VERSION) {
+    Readonly::Scalar($SOURCE_DIR => $SOURCE_DIR);
+    Readonly::Scalar($OUTPUT_DIR => $OUTPUT_DIR);
+}
+
+my %flavours;
+plugin_call("flavour", \%flavours);
+
+my %posts;
+plugin_call("postlist", \%posts);
+
+my %indexes;
+plugin_call("indexlist", \%posts, \%indexes);
+
+sub do_content {
+    my ($source, $path, $file, $flavour, $index) = @_;
+
+    open my $fh, "<", "$SOURCE_DIR/$source" or die "couldn't open '$SOURCE_DIR/$source' for read: $!";
+    chomp(my $title = <$fh>);
+    chomp(my $content = do { local $/; <$fh> });
+    close $fh;
+
+    $title =~ s/#.*//;
+    $title =~ s/^\s+//;
+    $title =~ s/\s+$//;
+
+    my $guid = $path."/".$file;
+    $guid =~ s/^\///;
+
+    my %stash = (
+        map ({ "rocket::".$_ => $default_stash{$_} } keys %default_stash),
+
+        "rocket::source"     => $source,
+
+        "rocket::path"       => $path,
+        "rocket::file"       => $file,
+        "rocket::flavour"    => $flavour,
+
+        "rocket::guid"       => $guid,
+
+        "rocket::title"      => $title,
+        "rocket::content"    => $content,
+        "rocket::timestamp"  => $posts{$source}->{timestamp},
+    );
+
+    $stash{"rocket::index"} = $index if defined $index;
+
+    $stash{"rocket::pretty_timestamp"} = scalar localtime $stash{"rocket::timestamp"};
+
+    plugin_call("content", \%stash, $posts{$source});
+
+    return \%stash;
+}
+
+sub interpolate {
+    my ($text, $stash) = @_;
+
+    while ($text =~ s/\%([^\%]+::[^\%]+)\%/exists $stash->{$1} ? $stash->{$1} : "UNDEFINED[$1]"/ge) {}
+
+    return $text;
+}
+
+print "generating individual posts...\n";
+
+for my $flavour (keys %flavours) {
+    next if $flavours{$flavour}->{config}->{no_individual_posts};
+
+    for my $source (keys %posts) {
+        my ($path, $file) = $source =~ m/^(.*?)\/?([^\/]+)\.txt$/;
+        $path = "" if !defined $path;
+
+        print "  $source -> $path/$file.$flavour\n";
+
+        my ($stash) = do_content($source, $path, $file, $flavour, undef);
+
+        my $out = $flavours{$flavour}->{templates}->{head}.
+                  $flavours{$flavour}->{templates}->{content}.
+                  $flavours{$flavour}->{templates}->{foot};
+
+        $out = interpolate($out, $stash);
+
+        make_path("$OUTPUT_DIR/$path") if !-d "$OUTPUT_DIR/$path";
+
+        open my $fh, ">", "$OUTPUT_DIR/$path/$file.$flavour" or die "couldn't open '$OUTPUT_DIR/$path/$file.$flavour' for write: $!";
+        print $fh $out;
+        close $fh;
+    }
+}
+
+print "generating indexes...\n";
+
+for my $flavour (keys %flavours) {
+    for my $index (keys %indexes) {
+        my $content = '';
+        my $stash;
+
+        print "  $index/index.$flavour\n";
+
+        my $num_index_items = $flavours{$flavour}->{config}->{num_index_items} || @{$indexes{$index}};
+
+        for my $source (grep { defined } @{$indexes{$index}}[0..($num_index_items-1)]) {
+            my ($path, $file) = $source =~ m/^(.*?)\/?([^\/]+)\.txt$/;
+            $path = "" if !defined $path;
+
+            ($stash) = do_content($source, $path, $file, $flavour, $index);
+
+            $content .= interpolate($flavours{$flavour}->{templates}->{content}, $stash);
+        }
+
+        my $head = interpolate($flavours{$flavour}->{templates}->{head}, $stash);
+        my $foot = interpolate($flavours{$flavour}->{templates}->{foot}, $stash);
+
+        make_path("$OUTPUT_DIR/$index") if !-d "$OUTPUT_DIR/$index";
+
+        open my $fh, ">", "$OUTPUT_DIR/$index/index.$flavour" or die "couldn't open '$OUTPUT_DIR/$index/index.$flavour' for write: $!";
+        print $fh $head, $content, $foot;
+        close $fh;
+    }
+}
+
+print "copying extra files...\n";
+
+my %extrafiles;
+plugin_call("extrafiles", \%extrafiles);
+for my $source (sort keys %extrafiles) {
+    my $target = $extrafiles{$source};
+    print "  $source -> $target\n";
+    copy("$SOURCE_DIR/$source", "$OUTPUT_DIR/$target");
+}
+
+# plugin base class. gets you a basic new if you inherit from it
+package rocket::plugin;
+
+sub new {
+    my ($class) = @_;
+
+    return bless \do {my $dummy}, $class;
+}
+
+
+# core plugin, provides basic version of all the plugin functions for when
+# there are no plugins
+package rocket::plugin::core;
+
+use base qw(rocket::plugin);
+
+use File::Find::Rule;
+use File::stat;
+
+sub flavour {
+    my ($self, $flavours) = @_;
+
+    while (my $line = <DATA>) {
+        last if $line =~ m/^__END__$/;
+        my ($flavour, $template, $text) = $line =~ m/^(\S+)\s+(\S+)\s+(.*)$/;
+        $flavours->{$flavour}->{templates}->{$template} = $text;
+    }
+
+    return 1;
+}
+
+sub postlist {
+    my ($self, $posts) = @_;
+
+    # find the source posts
+    my @posts = File::Find::Rule->name("*.txt")
+                                  ->readable
+                                  ->nonempty
+                                  ->relative
+                                  ->in($SOURCE_DIR);
+
+    # add them and their timestamps to the story hash
+    for my $post (@posts) {
+        $posts->{$post} = {
+            timestamp => stat("$SOURCE_DIR/$post")->mtime,
+        };
+    }
+
+    return 1;
+}
+
+sub indexlist {
+    my ($self, $posts, $indexes) = @_;
+
+    my @paths;
+
+    # figure out where we need indexes
+    for my $post (keys %$posts) {
+        my ($path) = $post =~ m/^(.*?)\/?[^\/]+\.txt$/;
+        $path = "" if !defined $path;
+        push @paths, $path;
+    }
+
+    # and what to put in them
+    for my $path (@paths) {
+        my @posts = sort { $posts->{$b}->{timestamp} <=> $posts->{$a}->{timestamp} } grep { m/^$path/ } keys %$posts;
+        $indexes->{$path} = \@posts;
+    }
+
+    return 1;
+}
+
+sub content {
+    my ($self, $stash, $postdata) = @_;
+
+    return 1;
+}
+
+sub extrafiles {
+    my ($self, $extrafiles) = @_;
+
+    return 1;
+}
+
+
+# default templates for the html flavour
+__DATA__
+html head <html><title>%rocket::blog_title%</title></head><body><h1>%rocket::blog_title%</h1>
+html content <p><a href="%rocket::blog_url%%rocket::guid%.%rocket::flavour%"><b>%rocket::title%</b></a><br />%rocket::content%<br />posted at: %rocket::timestamp%<br />
+html foot <small>powered by rocket</small></a></body></html>
+__END__
