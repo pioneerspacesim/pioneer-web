@@ -6,13 +6,4 @@ The game is open-ended, and you are free to explore the millions of star systems
 
 When Pioneer is finished there will be many ways to make ends meet: piracy, smuggling, bounty-hunting, mining, doing missions for the various factions fighting for power, freedom or self-determination.
 
-<div class="slider-wrapper theme-dark">
-  <div class="ribbon"></div>
-  <div id="slider" class="nivoSlider">
-    <img src="assets/ss1.png">
-    <img src="assets/ss2.png">
-    <img src="assets/ss3.png">
-    <img src="assets/ss4.png">
-    <img src="assets/ss5.png">
-  </div>
-</div>
+%slideshow::slideshow%
