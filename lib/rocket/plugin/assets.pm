@@ -9,8 +9,8 @@ use base qw(rocket::plugin);
 sub extrafiles {
     my ($self, $extrafiles) = @_;
 
-    opendir my $dir, $rocket::SOURCE_DIR;
-    map { $extrafiles->{$_} = $_ } grep { m/\.(?:png|gif|css|js)$/ or m/^\.[^\.]/ } readdir $dir;
+    opendir my $dir, "$rocket::SOURCE_DIR/assets";
+    map { $extrafiles->{"assets/$_"} = "assets/$_" } grep { m/^[^\.]/ } readdir $dir;
     closedir $dir;
 
     return 1;

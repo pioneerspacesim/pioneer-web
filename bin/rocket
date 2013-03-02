@@ -200,6 +200,9 @@ plugin_call("extrafiles", \%extrafiles);
 for my $source (sort keys %extrafiles) {
     my $target = $extrafiles{$source};
     print "  $source -> $target\n";
+    my $path = "$OUTPUT_DIR/$target";
+    $path =~ s{/[^/]+$}{};
+    make_path($path);
     copy("$SOURCE_DIR/$source", "$OUTPUT_DIR/$target");
 }
 
