@@ -10,7 +10,7 @@ sub extrafiles {
     my ($self, $extrafiles) = @_;
 
     opendir my $dir, $rocket::SOURCE_DIR;
-    map { $extrafiles->{$_} = $_ } grep { m/\.(?:png|css)$/ or m/^\.[^\.]/ } readdir $dir;
+    map { $extrafiles->{$_} = $_ } grep { m/\.(?:png|gif|css|js)$/ or m/^\.[^\.]/ } readdir $dir;
     closedir $dir;
 
     return 1;
