@@ -16,3 +16,5 @@ The code is available over at GitHub. Feel free to grab it and dive in. If you w
 If you're still not sure, feel free to ask the forum or in the IRC channel. One of our friendly developers will be able to help you find the job thats perfect for you!
 
 And just think - if you're a contributor, then nobody can stop you when you decide to name a star after yourself. Its only fair :)
+
+To get started, read the [development section](http://pioneerwiki.com/) on the wiki.

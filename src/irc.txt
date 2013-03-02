@@ -1,7 +1,0 @@
-IRC
-
-If you consider yourself a designer, coder or tester, and want to get properly involved with Pioneer, the developers warmly invite you to join the official IRC channel. For those not familiar with Internet Relay Chat, it's a real time multi-user chat application dating back from the late 1980s, and it's a great way to get a group of people together to discuss things in (almost) real time.
-
-*It is recommended that anybody wishing to make code contributions joins the IRC channel.* Almost all the dev coordination happens there, including lively discussions involving the issues logged on the tracker. Non-developers are welcome, but bear in mind that when chat turns technical, you might start to feel excluded. It's not deliberate, it's just that we're concentrating on making a great game for you.
-
-If you wish to use an IRC client, you can find us on Freenode. Most clients have Freenode as a pre-configured option; if you need to type in a server name, use irc.freenode.net. The channel name is #pioneer.
