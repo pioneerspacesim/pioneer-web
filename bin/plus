@@ -29,7 +29,7 @@ for my $item (splice @{$data->{items}}, 0, 10) {
 
     my $postURL = $item->{url};
 
-    my $time = time2str("%e %b at %R UTC", str2time($item->{published}));
+    my $time = time2str("%e %b at %R UTC", str2time($item->{published}), 'UTC');
 
     my ($title) = $item->{title} =~ m/^(.*?)$/m;
 
