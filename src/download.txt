@@ -2,25 +2,24 @@ Download Pioneer
 
 We occasionally make alpha releases of Pioneer to showcase recent developments and to get feedback and ideas. We'd love for you to take Pioneer for a spin.  These are unfinished development snapshots, and are lots of fun!
 
-The latest release is Alpha 31, released 8 February 2013.
+The latest release is Alpha 32, released 8 March 2013.
 
 #### Binary builds
 
 Pre-built copies of the game are available for the following platforms:
 
-* [Windows](http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha31-win32.7z/download) (192.2MB)
-* [Mac OS X](http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha31.dmg/download) (202.5MB)
-* [Linux 32-bit](http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha31-linux32.tar.bz2/download) (196.0MB)
-* [Linux 64-bit](http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha31-linux64.tar.bz2/download) (196.3MB)
+* [Windows](http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha32-win32.7z/download) (155.7MB)
+* [Linux 32-bit](http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha32-linux32.tar.bz2/download) (161.0MB)
+* [Linux 64-bit](http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha32-linux64.tar.bz2/download) (161.2MB)
 
 #### Source code
 
-* [Source code](https://github.com/pioneerspacesim/pioneer/tree/alpha31)
+* [Source code](https://github.com/pioneerspacesim/pioneer/tree/alpha32)
 
 See the [compiling guide](https://github.com/pioneerspacesim/pioneer/blob/master/COMPILING.txt) to find out how to get it up and running.
 
 #### Changelog
 
-For Alpha 31. [Changelog for all releases](https://github.com/pioneerspacesim/pioneer/blob/master/Changelog.txt).
+For Alpha 32. [Changelog for all releases](https://github.com/pioneerspacesim/pioneer/blob/master/Changelog.txt).
 
 %module::changelog%
