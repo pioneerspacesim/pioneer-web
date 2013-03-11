@@ -32,6 +32,7 @@ for my $item (splice @{$data->{items}}, 0, 10) {
     my $time = time2str("%e %b at %R UTC", str2time($item->{published}), 'UTC');
 
     my ($title) = $item->{title} =~ m/^(.*?)$/m;
+    $title = $item->{object}->{attachments}->[0]->{displayName} // "" unless $title;
 
     my $object = $item->{verb} eq 'share' ? $item->{object} : $item;
     my $author    = $object->{actor}->{displayName};
