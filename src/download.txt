@@ -9,10 +9,9 @@ The latest release is Alpha 33, released 12 April 2013.
 Pre-built copies of the game are available for the following platforms:
 
 * [Windows](http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha33-win32.7z/download) (156.1MB)
+* [Mac OS X](http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha33.dmg/download) (170.6MB)
 * [Linux 32-bit](http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha33-linux32.tar.bz2/download) (161.6MB)
 * [Linux 64-bit](http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha33-linux64.tar.bz2/download) (161.7MB)
-
-The Mac OS X build will be available shortly.
 
 #### Source code
 
