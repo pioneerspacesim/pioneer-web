@@ -74,9 +74,9 @@
 <div id='download'>
 <a id='download-button' href='/download'>
   <div id='download-content'>
-    <h3>Pioneer alpha 33</h3>
+    <h3>Pioneer</h3>
     <h4>Free download<span id='download-platform'></span></h4>
-    <p>Released 12 Apr 2013<span id='download-size'></span></p>
+    <p><span id='download-version'></span><br><span id='download-date'></span><span id='download-size'></span></p>
   </div>
 </a>
 <div id='download-links'>
@@ -88,10 +88,7 @@
 //<!CDATA[
   (function () {
     var releases = {
-      "Win":   [ "Windows",  "http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha33-win32.7z/download",        "156.1MB" ],
-      "Mac":   [ "Mac OS X", "http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha33.dmg/download",             "170.6MB" ],
-      "Lin":   [ "Linux 32", "http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha33-linux32.tar.bz2/download", "161.6MB" ],
-      "Lin64": [ "Linux 64", "http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha33-linux64.tar.bz2/download", "161.7MB" ],
+      %module::buildjs%
     };
 
     var platform = navigator.platform.substr(0,3);
@@ -103,8 +100,10 @@
         return;
 
     document.getElementById("download-platform").innerHTML = " for " + release[0];
-    document.getElementById("download-button").href        = release[1];
-    document.getElementById("download-size").innerHTML     = " &middot; " + release[2];
+    document.getElementById("download-version").innerHTML  = "Version: " + release[1];
+    document.getElementById("download-button").href        = release[2];
+    document.getElementById("download-date").innerHTML     = release[3];
+    document.getElementById("download-size").innerHTML     = " &middot; " + release[4];
   })();
 //]]>
 </script>

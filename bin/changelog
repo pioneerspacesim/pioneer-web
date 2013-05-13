@@ -1,0 +1,61 @@
+#!/usr/bin/env perl
+
+use 5.010;
+use warnings;
+use strict;
+use autodie;
+
+use LWP::UserAgent;
+
+use FindBin;
+my $outfile = "$FindBin::Bin/../src/changelog.html";
+
+my $res = LWP::UserAgent->new->get("https://raw.github.com/pioneerspacesim/pioneer/master/Changelog.txt");
+die "get failed: ".$res->as_string unless $res->is_success;
+
+my @lines = split /[\r\n]+/, $res->content;
+
+my ($group, @sections, %log);
+
+for my $line (@lines) {
+    if (my ($g) = $line =~ m/^(\S.*)/) {
+        if (not $group) {
+            $group = $g;
+            next;
+        }
+        last;
+    }
+
+    next if not $group;
+
+    if (my ($section) = $line =~ m/^   \*\s+(.+?)\s*$/) {
+        push @sections, $section;
+        next;
+    }
+
+    if (my ($log) = $line =~ m/^     \*\s+(.+?)\s*$/) {
+        push @{$log{$sections[-1]}}, $log;
+        next;
+    }
+
+    if (my ($cont) = $line =~ m/^\s+(.+?)\s*$/) {
+        $log{$sections[-1]}->[-1] .= " $cont";
+        next;
+    }
+}
+
+open my $out, ">", $outfile;
+say $out "For $group. <a href='https://github.com/pioneerspacesim/pioneer/blob/master/Changelog.txt'>Full changelog</a>.";
+say $out "";
+say $out "<ul>";
+for my $section (@sections) {
+    say $out "  <li><p>$section</p>";
+    say $out "  <ul>";
+    for my $line (@{$log{$section}}) {
+        $line =~ s{#(\d+)}{<a href="https://github.com/pioneerspacesim/pioneer/issues/$1">#$1</a>}g;
+        say $out "  <li>$line</li>";
+    }
+    say $out "  </li></ul>";
+}
+say $out "</ul>";
+close $out;

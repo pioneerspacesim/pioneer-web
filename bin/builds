@@ -1,0 +1,78 @@
+#!/usr/bin/env perl
+
+use 5.010;
+use warnings;
+use strict;
+use autodie;
+
+use HTML::TreeBuilder 5 -weak;
+use Date::Parse;
+use Date::Format;
+
+use FindBin;
+my $jsoutfile = "$FindBin::Bin/../src/buildjs.html";
+my $dloutfile = "$FindBin::Bin/../src/builddl.html";
+
+my $root = HTML::TreeBuilder->new_from_url("http://sourceforge.net/projects/pioneerspacesim/files/");
+
+my @rows = $root->look_down(
+    _tag  => "tr",
+    title => qr/^pioneer-/,
+    class => qr/file/,
+);
+
+my %platforms = (
+    win32   => [ "Win",   "Windows" ],
+    linux32 => [ "Lin",   "Linux 32" ],
+    linux64 => [ "Lin64", "Linux 64" ],
+    osx     => [ "Mac",   "Mac OS X" ],
+);
+
+my %latest = (
+    osx => [ "alpha 33", "http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha33.dmg/download", "12 April 2013", "170.6 MB" ],
+);
+
+for my $row (@rows) {
+    my $basename = $row->attr("title");
+    my ($version, $platform) = $basename =~ m/^pioneer-([\d\.]+)-([^\.]+)/;
+
+    my $url = $row->look_down(
+        _tag  => "a",
+        class => "name",
+    )->attr("href");
+    my ($date) = $row->look_down(
+        _tag    => "td",
+        headers => "files_date_h",
+    )->look_down(
+        _tag => "abbr",
+    )->content_list;
+    my ($size) = $row->look_down(
+        _tag => "td",
+        headers => "files_size_h",
+    )->content_list;
+
+    $date = time2str("%e %b %Y", str2time($date));
+
+    $latest{$platform} = [ $version, $url, $date, $size ] if !exists $latest{$platform} || $latest{$platform}->[0] lt $version;
+}
+
+{
+open my $out, '>', $jsoutfile;
+for my $platform (keys %platforms) {
+    my ($short, $pretty) = @{$platforms{$platform}};
+    say $out qq{"$short": [ "} . join(qq{", "}, $pretty, @{$latest{$platform}}) . qq{" ],};
+}
+close $out;
+}
+
+{
+open my $out, '>', $dloutfile;
+say $out "<ul>";
+for my $platform (keys %platforms) {
+    my ($short, $pretty) = @{$platforms{$platform}};
+    my ($version, $url, $date, $size) = @{$latest{$platform}};
+    say $out sprintf("<li><a href='%s'>%s</a> (%s &middot; %s &middot; %s)</li>", $url, $pretty, $version, $date, $size);
+}
+say $out "</ul>";
+close $out;
+}

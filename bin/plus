@@ -49,5 +49,3 @@ END
 }
 
 close $out;
-
-system "$rocket";
