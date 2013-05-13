@@ -10,7 +10,7 @@ Pre-built copies of the game are available for the following platforms:
 
 #### Source code
 
-Complete source for the game, including assets, is always available from our wGitHub repository](https://github.com/pioneerspacesim/pioneer).
+Complete source for the game, including assets, is always available from our [GitHub repository](https://github.com/pioneerspacesim/pioneer).
 
 See the [compiling guide](https://github.com/pioneerspacesim/pioneer/blob/master/COMPILING.txt) to find out how to get it up and running.
 
