@@ -45,7 +45,7 @@ for my $row (@rows) {
         headers => "files_date_h",
     )->look_down(
         _tag => "abbr",
-    )->content_list;
+    )->attr("title");
     my ($size) = $row->look_down(
         _tag => "td",
         headers => "files_size_h",
