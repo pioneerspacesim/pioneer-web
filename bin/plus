@@ -22,7 +22,7 @@ die "plus feed fetch failed: ".$res->status_line unless $res->is_success;
 
 my $data = decode_json($res->content);
 
-open my $out, ">", $outfile;
+open my $out, ">:encoding(UTF-8)", $outfile;
 
 for my $item (splice @{$data->{items}}, 0, 10) {
     next if $item->{kind} ne "plus#activity";
