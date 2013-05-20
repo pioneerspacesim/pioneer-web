@@ -53,7 +53,16 @@ for my $row (@rows) {
 
     $date = time2str("%e %b %Y", str2time($date));
 
-    $latest{$platform} = [ $version, $url, $date, $size ] if !exists $latest{$platform} || $latest{$platform}->[0] lt $version;
+    my $version_lt = sub {
+        my ($a, $b) = @_;
+        my ($am, $ab) = split /\./, $a;
+        my ($bm, $bb) = split /\./, $b;
+        return 1 if $am < $bm;
+        return if $am > $bm;
+        return $ab < $bb;
+    };
+
+    $latest{$platform} = [ $version, $url, $date, $size ] if !exists $latest{$platform} || $version_lt->($latest{$platform}->[0], $version);
 }
 
 {
