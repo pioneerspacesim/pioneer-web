@@ -13,7 +13,8 @@ Pioneer needs work in pretty much every area right now. There's something for ev
 
 The code is available over at GitHub. Feel free to grab it and dive in. If you want to help but have no idea where to start, take a look at the issue tracker; there's lots of low-hanging fruit in there if you like some instant gratification (and your name in the credits!).
 
-If you're still not sure, feel free to ask the forum or in the IRC channel. One of our friendly developers will be able to help you find the job thats perfect for you!
+If you're still not sure, feel free to ask the forum or in the [IRC
+channel](/irc). One of our friendly developers will be able to help you find the job thats perfect for you!
 
 And just think - if you're a contributor, then nobody can stop you when you decide to name a star after yourself. Its only fair :)
 
