@@ -25,7 +25,7 @@ my %platforms = (
     win32   => [ "Win",   "Windows" ],
     linux32 => [ "Lin",   "Linux 32" ],
     linux64 => [ "Lin64", "Linux 64" ],
-    osx     => [ "Mac",   "Mac OS X" ],
+#    osx     => [ "Mac",   "Mac OS X" ],
 );
 
 my %latest = (
