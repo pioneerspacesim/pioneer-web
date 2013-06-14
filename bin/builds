@@ -25,13 +25,10 @@ my %platforms = (
     win32   => [ "Win",   "Windows" ],
     linux32 => [ "Lin",   "Linux 32" ],
     linux64 => [ "Lin64", "Linux 64" ],
-#    osx     => [ "Mac",   "Mac OS X" ],
+    osx     => [ "Mac",   "Mac OS X" ],
 );
 
-my %latest = (
-    osx => [ "alpha 33", "http://sourceforge.net/projects/pioneerspacesim/files/alpha/pioneer-alpha33.dmg/download", "12 April 2013", "170.6 MB" ],
-);
-
+my %latest;
 for my $row (@rows) {
     my $basename = $row->attr("title");
     my ($version, $platform) = $basename =~ m/^pioneer-([\d\.]+)-([^\.]+)/;
