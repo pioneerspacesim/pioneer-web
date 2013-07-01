@@ -89,6 +89,14 @@ div#nav {
     font-weight: bold;
 }
 
+div#nav > div#nav-left {
+  float: left;
+}
+
+div#nav > div#nav-right {
+  text-align: right;
+}
+
 div#nav a {
     padding: 0 10px;
 }
