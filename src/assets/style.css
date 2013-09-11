@@ -212,6 +212,42 @@ div#download-links {
     text-align: right;
 }
 
+div#donate {
+    clear: both;
+    padding: 10px 0;
+}
+
+div#donate > p {
+    padding: 5px 0;
+}
+
+div#donate > p a {
+    text-decoration: underline;
+}
+
+div#donate > div {
+    padding: 5px 0;
+}
+
+div#donate-paypal {
+    display: inline-block;
+}
+
+form.paypal-button {
+    display: inline;
+    vertical-align: middle;
+}
+
+div#donate-flattr {
+    display: inline-block;
+    float: right;
+}
+
+p#donate-text {
+    clear: both;
+    padding: 5px 0;
+}
+
 div#news {
     clear: both;
     padding: 10px 0;
