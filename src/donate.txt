@@ -1,10 +1,7 @@
 Donate to Pioneer
 
 Pioneer is developed by a group of volunteers from all over the world, giving
-up their spare time and energy to try and make something great. Unfortunately
-managing a project like this does cost money, and someone has to pay for it.
-The money you donate goes will go towards web hosting (this website,
-development forum, wiki and mailing list) and providing the build machines.
+up their spare time and energy to try and make something great. 
 
 So if you enjoy playing Pioneer and would like to support its continued
 development, please consider donating. <a href='https://www.paypal.com/'>PayPal</a>
@@ -13,7 +10,10 @@ providers, but if these don't work for you please
 <a href='mailto:rob@eatenbyagrue.org?subject=Pioneer%20donation'>let us know</a>
 and we can make other arrangements.
 
+The money you donate goes will go towards web hosting (this website,
+development forum, wiki and mailing list) and providing the build servers.
+
 If you have donated in the past and would like to be acknowledged here,
 <a href='mailto:rob@eatenbyagrue.org?subject=Pioneer%20donation'>let us know</a>.
 
-Thank you all for continued support of Pioneer.
+Thank you all for your continued support of Pioneer.
