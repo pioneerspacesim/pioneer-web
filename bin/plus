@@ -24,7 +24,7 @@ my $data = decode_json($res->content);
 
 open my $out, ">:encoding(UTF-8)", $outfile;
 
-for my $item (splice @{$data->{items}}, 0, 10) {
+for my $item (splice @{$data->{items}}, 0, 6) {
     next if $item->{kind} ne "plus#activity";
 
     my $postURL = $item->{url};
