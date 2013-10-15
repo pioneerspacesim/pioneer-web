@@ -38,10 +38,26 @@ for my $line (@lines) {
         next;
     }
 
+    if (my ($item) = $line =~ m/^       \*\s+(.+?)\s*$/) {
+        if (ref $log{$sections[-1]}->[-1] eq 'ARRAY') {
+            push @{$log{$sections[-1]}->[-1]}, $item;
+        }
+        else {
+            push @{$log{$sections[-1]}}, [$item];
+        }
+        next;
+    }
+
     if (my ($cont) = $line =~ m/^\s+(.+?)\s*$/) {
         $log{$sections[-1]}->[-1] .= " $cont";
         next;
     }
+}
+
+sub _markup {
+	my ($text) = @_;
+    $text =~ s{#(\d+)}{<a href="https://github.com/pioneerspacesim/pioneer/issues/$1">#$1</a>}g;
+	return $text;
 }
 
 open my $out, ">", $outfile;
@@ -51,9 +67,13 @@ say $out "<ul>";
 for my $section (@sections) {
     say $out "  <li><p>$section</p>";
     say $out "  <ul>";
-    for my $line (@{$log{$section}}) {
-        $line =~ s{#(\d+)}{<a href="https://github.com/pioneerspacesim/pioneer/issues/$1">#$1</a>}g;
-        say $out "  <li>$line</li>";
+    for my $item (@{$log{$section}}) {
+        if (ref $item eq 'ARRAY') {
+			say $out "    <ul><li>", join("</li><li>", map { _markup($_) } @$item), "</li></ul>";
+        }
+		else {
+			say $out "  <li>", _markup($item), "</li>";
+		}
     }
     say $out "  </li></ul>";
 }
