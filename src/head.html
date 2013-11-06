@@ -21,14 +21,20 @@
   <meta property="og:description" content="Pioneer is a space adventure game set in our galaxy at the turn of the 31st century.">
   <meta property="og:url" content="http://pioneerspacesim.net/">
 
-  <link rel="stylesheet" href="assets/nivo-slider.css" type="text/css" media="screen">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-  <script src="assets/jquery.nivo.slider.pack.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="assets/anythingslider.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="assets/theme-cs-portfolio.css" type="text/css" media="screen">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js" type="text/javascript"></script>
+  <script src="assets/jquery.anythingslider.min.js" type="text/javascript"></script>
 
   <script type="text/javascript">
-  $(window).load(function() {
-        $('#slider').nivoSlider({
-            pauseTime: 5000,
+  $(function() {
+        $('#slider').anythingSlider({
+            theme: "cs-portfolio",
+            buildStartStop: false,
+            autoPlay: true,
+            autoPlayLocked: true,
+            delay: 5000,
+            resumeDelay: 0,
         });
   });
   </script>

@@ -17,16 +17,14 @@ sub content {
     closedir $dir;
 
     my $html = join '', (
-        '<div class="slider-wrapper theme-dark">',
-        '<div class="ribbon"></div>',
-        '<div id="slider" class="nivoSlider">',
+        '<ul id="slider">'
     );
 
-    $html .= qq{<img src="$_">} for map { "assets/$_" } @screenshots;
+    $html .= qq{<li><img src="$_"></li>} for map { "assets/$_" } @screenshots;
 
     $html .= join '', (
-        '</div>',
-        '</div>',
+        '</ul>',
+        '<div id="slider-spacer"></div>',
     );
 
     $stash->{"slideshow::slideshow"} = $html;

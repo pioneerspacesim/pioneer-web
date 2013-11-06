@@ -273,17 +273,14 @@ ul {
     margin-left: 1em;
 }
 
-.nivoSlider {
+.panel {
     position:relative;
-    background:url(loading.gif) no-repeat 50% 50%;
+    background:url(loading.gif) no-repeat 50% 50% !important;
 }
-.nivoSlider img {
-    position:absolute;
-    top:0px;
-    left:0px;
-    display:none;
-}
-.nivoSlider a {
+.panel a {
     border:0;
     display:block;
+}
+#slider-spacer {
+    clear: both;
 }
