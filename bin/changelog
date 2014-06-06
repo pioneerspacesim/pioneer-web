@@ -10,7 +10,7 @@ use LWP::UserAgent;
 use FindBin;
 my $outfile = "$FindBin::Bin/../src/changelog.html";
 
-my $res = LWP::UserAgent->new->get("https://raw.github.com/pioneerspacesim/pioneer/master/Changelog.txt");
+my $res = LWP::UserAgent->new->get("https://raw.githubusercontent.com/pioneerspacesim/pioneer/master/Changelog.txt");
 die "get failed: ".$res->as_string unless $res->is_success;
 
 my @lines = split /[\r\n]+/, $res->content;
