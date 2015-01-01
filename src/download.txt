@@ -1,6 +1,8 @@
 Download Pioneer
 
-We regularly produce builds of Pioneer to make it easy for players to try out recent developments and to get feedback and ideas. We'd love for you to take Pioneer spind. These are unfinished development snapshots, and are lots of fun!
+We regularly produce builds of Pioneer to make it easy for players to try out
+recent developments and to get feedback and ideas. We'd love for you to take
+Pioneer for a spin. These are unfinished development snapshots, and are lots of fun!
 
 #### Binary builds
 
