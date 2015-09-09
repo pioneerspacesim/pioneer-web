@@ -7,10 +7,10 @@
   RewriteRule ^issues$ https://github.com/pioneerspacesim/pioneer/issues [L,R=301]
   RewriteRule ^list$ https://corbyn.site5.com/mailman/listinfo/pioneer-dev_pioneerspacesim.net [L,R=301]
   RewriteRule ^wiki$ http://pioneerwiki.com/ [L,R=301]
+  RewriteRule ^faq$ http://pioneerwiki.com/wiki/FAQ [L,R=301]
   RewriteRule ^irc$ http://webchat.freenode.net/?channels=pioneer [L,R=301]
 
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^(.*)$ $1.html [L,QSA]
 </IfModule>
-
