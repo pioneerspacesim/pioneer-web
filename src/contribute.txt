@@ -10,6 +10,9 @@ Pioneer needs work in pretty much every area right now. There's something for ev
 * Story development (including starsystems)
 * Testing, filing bugs and complaining
 * Documentation (eg getting started, how to fly, writing missions, etc)
+* For more ideas, please visit our [wiki page](http://pioneerwiki.com/wiki/How_you_can_contribute)
+  on how you can contribute
+
 
 The code is available over at GitHub. Feel free to grab it and dive in. If you want to help but have no idea where to start, take a look at the issue tracker; there's lots of low-hanging fruit in there if you like some instant gratification (and your name in the credits!).
 
