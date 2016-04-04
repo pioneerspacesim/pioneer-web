@@ -7,6 +7,7 @@ package rocket::plugin::slideshow;
 use 5.010;
 use warnings;
 use strict;
+use experimental qw(switch);
 
 use base qw(rocket::plugin);
 
