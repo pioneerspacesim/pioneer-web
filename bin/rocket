@@ -18,7 +18,7 @@ our $OUTPUT_DIR = "$FindBin::Bin/../out";
 my %default_stash = (
     "site_name"        => "Pioneer",
     "site_description" => "A game of lonely space adventure",
-    "site_url"         => "http://pioneerspacesim.net/",
+    "site_url"         => "https://pioneerspacesim.net/",
 );
 
 use FindBin;

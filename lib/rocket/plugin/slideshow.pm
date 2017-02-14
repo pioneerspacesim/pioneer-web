@@ -17,7 +17,7 @@ sub format_video {
     given ($type) {
         when ("vimeo") {
             return qq{
-                <iframe src="http://player.vimeo.com/video/$id?title=0&byline=0&portrait=0&badge=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                <iframe src="https://player.vimeo.com/video/$id?title=0&byline=0&portrait=0&badge=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
             };
         }
         default {
